@@ -17,3 +17,14 @@ def fixture_torneo(equipos):
             partido = (equipos[i], equipos[j])
             partidos.append(partido)
     return partidos
+
+def resultados_partidos(partidos):
+    resultados = {}
+    for partido in partidos:
+        equipo_local = partido[0]
+        equipo_visitante = partido[1]
+        resultado_local = int(input("Ingrese el resultado del partido " + str(equipo_local) + " VS " + str(equipo_visitante) + ": " ))
+        resultado_visitante = int(input("Ingrese el resultado del partido " + str(equipo_visitante) + " VS " + str(equipo_local) + ": "))
+        resultados[partido] = (resultado_local, resultado_visitante)
+    return resultados
+
