@@ -17,7 +17,7 @@ def fixture_torneo(equipos):
             partido = (equipos[i], equipos[j])
             partidos.append(partido)
     return partidos
-
+    
 def resultados_partidos(partidos):
     resultados = {}
     for partido in partidos:
@@ -28,3 +28,34 @@ def resultados_partidos(partidos):
         resultados[partido] = (resultado_local, resultado_visitante)
     return resultados
 
+def tabla_posiciones(equipos, resultados):
+    tabla_posiciones = {}
+    for equipo in equipos:
+        tabla_posiciones[equipo] = {"Puntos": 0, "Goles a favor": 0, "Goles en contra": 0}
+
+    for partido in resultados:
+        goles_local = resultados[partido][0]
+        goles_visitantes = resultados[partido][1]
+
+        equipo_local = partido[0]
+        equipo_visitante = partido[1]
+
+        if goles_local > goles_visitantes:
+            tabla_posiciones[equipo_local]["Puntos"] += 3
+        elif goles_local < goles_visitantes:
+            tabla_posiciones[equipo_visitante]["Puntos"] += 3
+        else:
+            tabla_posiciones[equipo_local]["Puntos"] += 1
+            tabla_posiciones[equipo_visitante]["Puntos"] += 1
+        
+        tabla_posiciones[equipo_local]["Goles a favor"] += goles_local
+        tabla_posiciones[equipo_local]["Goles en contra"] += goles_visitantes
+        tabla_posiciones[equipo_visitante]["Goles a favor"] += goles_visitantes
+        tabla_posiciones[equipo_visitante]["Goles en contra"] += goles_local
+    return tabla_posiciones
+
+equipos = ingresar_equipos()
+partidos = fixture_torneo(equipos)
+resultados = resultados_partidos(partidos)
+posiciones = tabla_posiciones(equipos, resultados)
+print(posiciones)
