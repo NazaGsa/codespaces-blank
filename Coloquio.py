@@ -1,3 +1,4 @@
+#Creamos un programa que nos permite ingresar X cantidad de equipos para un torneo de futbol.
 print("#"*20)
 print("Torneo de Futbol")
 print("#"*20)
@@ -9,6 +10,7 @@ def ingresar_equipos():
         equipos.append(equipo)
     return equipos
 
+#Creamos el fixture, donde se enfrentan en cada fehca los equipos.
 def fixture_torneo(equipos):
     num_equipos = len(equipos)
     partidos = []
@@ -17,7 +19,9 @@ def fixture_torneo(equipos):
             partido = (equipos[i], equipos[j])
             partidos.append(partido)
     return partidos
-    
+
+#Solicitamos al usuario ingresar los goles del equipo local y visitante, el equipo con mas goles es el ganador.
+
 def resultados_partidos(partidos):
     resultados = {}
     for partido in partidos:
@@ -27,6 +31,9 @@ def resultados_partidos(partidos):
         resultado_visitante = int(input("Ingrese el resultado del partido " + str(equipo_visitante) + " VS " + str(equipo_local) + ": "))
         resultados[partido] = (resultado_local, resultado_visitante)
     return resultados
+
+#Creamos una funcion donde calcule los puntos de cada partido. (Victoria + 3), (Empate + 1), (Derrota no suma)
+#Se calcula la puntuacion y los goles a favor y en contra y se arma la tabla de posiciones.
 
 def tabla_posiciones(equipos, resultados):
     tabla_posiciones = {}
